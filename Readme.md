@@ -1,1 +1,1 @@
-adicionar o readme aqui
+# Trabalho_IA_Fuzzy
