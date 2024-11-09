@@ -18,20 +18,33 @@
 #    pip install Flask
 #    pip install PyMuPDF
 #
-# 2) Inicie o servidor Flask:
-# Após abrir o atual diretóro no CMD, digite:
+# 2) configure o servidor Flask:
+#
+#   2.1] Alterar o Host: substitua app.run(debug=True) por app.run(host='0.0.0.0', port=5000, debug=True). 
+#   Isso faz com que o Flask escute em todas as interfaces de rede da máquina, permitindo que outros dispositivos
+#   na mesma rede acessem a aplicação.
+#
+#   2.2] Permissões de Firewall: Verifique se o firewall do sistema permite conexões na porta 5000.
+#   Se necessário, adicione uma regra para liberar essa porta.
+#
+#   2.3] Acesso pela Rede: Depois de configurar, outro dispositivo poderá acessar a aplicação substituindo 127.0.0.1 
+#   pelo endereço IP da máquina onde o Flask está rodando. Por exemplo, se o IP for 192.168.1.10,
+#   a URL de acesso seria http://192.168.1.10:5000/upload_pdf.
+#
+# 3) Inicie o servidor Flask:
+#  Após abrir o atual diretóro no CMD, digite:
 #
 #    python leitor_pdf_labfertil_V4.py
 #
-# ou rode a aplicação por uma IDE.
+#  ou rode a aplicação por uma IDE.
 #
-# 3)Enviar o PDF via POST Request:
-# Usando cURL: No CMD, execute:
+# 4)Enviar o PDF via POST Request:
+#  Usando cURL: No CMD, execute:
 #
 #    curl -X POST -F "file=@C:/caminho/para/seu/arquivo/Exemplo de Laudo - Análise de Solo.pdf" http://127.0.0.1:5000/upload_pdf
 #
-# 4)Receber a resposta:
-# A resposta será um JSON contendo os dados extraídos do PDF.
+# 5)Receber a resposta:
+#  A resposta será um JSON contendo os dados extraídos do PDF.
 #
 #                             -
 #                             ^
