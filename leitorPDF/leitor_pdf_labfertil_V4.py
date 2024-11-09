@@ -1,5 +1,6 @@
-# é necessário instalar o PyMuPDF antes, execute no CMD:
+# é necessário instalar o PyMuPDF e o Flaskantes, execute no CMD:
 # pip install PyMuPDF
+# pip install Flask
 
 # A correta configuração do leitor exigiria um domínio dos pontos (pt, a unidade de m,edida padrão dos PDFs),]
 # mas seria conveniente um serviço como adobe acrobat, que é pago.
@@ -7,8 +8,30 @@
 # aceitando valores extras para ajustar o padding de cada variável individualmente.
 #
 #
-#   A V3 corresponde a um script executavel dentro da linha de comando. abra o atual diretório no CMD e digite:
-#   python leitor_pdf_labfertil_V3.py "Exemplo de Laudo - Análise de Solo.pdf"
+# API Flask: O Flask é usado para criar um servidor web simples.
+# Rota /upload_pdf: O endpoint /upload_pdf recebe um arquivo PDF via método POST. O arquivo é salvo temporariamente no servidor e processado.
+# Envio de Arquivo via HTTP: O arquivo PDF é enviado por um cliente (como um navegador ou outro script).
+
+# Para executar a aplicação:
+# 1) Instalar dependencias:
+#
+#    pip install Flask
+#    pip install PyMuPDF
+#
+# 2) Inicie o servidor Flask:
+# Após abrir o atual diretóro no CMD, digite:
+#
+#    python leitor_pdf_labfertil_V4.py
+#
+# ou rode a aplicação por uma IDE.
+#
+# 3)Enviar o PDF via POST Request:
+# Usando cURL: No CMD, execute:
+#
+#    curl -X POST -F "file=@C:/caminho/para/seu/arquivo/Exemplo de Laudo - Análise de Solo.pdf" http://127.0.0.1:5000/upload_pdf
+#
+# 4)Receber a resposta:
+# A resposta será um JSON contendo os dados extraídos do PDF.
 #
 #                             -
 #                             ^
@@ -23,12 +46,11 @@
 #                             |
 #                             V
 #      
-
-
+from flask import Flask, request, jsonify
 import fitz  # PyMuPDF
-import json  # Biblioteca para manipulação de JSON
-import argparse  # Para manipulação de argumentos de linha de comando
+import json
 
+app = Flask(__name__)
 
 def extrair_valor_ind_smp(pdf_path):
     pdf_document = fitz.open(pdf_path)
@@ -65,7 +87,13 @@ def extrair_valor_p(pdf_path):
     pdf_document.close()
     return valor
 
-# Função auxiliar para encontrar o valor abaixo de uma palavra-chave
+def extrair_valor_ind_smp(pdf_path):
+    pdf_document = fitz.open(pdf_path)
+    page = pdf_document[0]  # Primeira página
+    valor = extrair_valor_abaixo(page, "SMP", -10, 0, 10, 15)
+    pdf_document.close()
+    return valor
+
 def extrair_valor_abaixo(page, keyword, left=-5, top=0, right=5, below=11):
     # Localiza o texto da palavra-chave na página
     text_instances = page.search_for(keyword)
@@ -81,7 +109,23 @@ def extrair_valor_abaixo(page, keyword, left=-5, top=0, right=5, below=11):
         return value
     return None
 
-def main(pdf_path):
+@app.route('/upload_pdf', methods=['POST'])
+def upload_pdf():
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part"}), 400
+    file = request.files['file']
+    
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+    
+    # Salva o arquivo PDF temporariamente
+    pdf_path = './temp_pdf.pdf'
+    file.save(pdf_path)
+
+
+
+    
+
     # Extração dos dados
     SMP = extrair_valor_ind_smp(pdf_path)
     K = extrair_valor_k(pdf_path)
@@ -100,18 +144,8 @@ def main(pdf_path):
 
     # Convertendo o dicionário para JSON
     dados_json = json.dumps(dados_analise, indent=4, ensure_ascii=False)
+    
+    return jsonify(dados_json)
 
-    # Exibindo o JSON
-    print("=============Resultado da Análise (JSON):============")
-    print(dados_json)
-
-if __name__ == "__main__":
-    # Configuração do parser de argumentos
-    parser = argparse.ArgumentParser(description="Extrair dados de análise de solo a partir de um arquivo PDF.")
-    parser.add_argument("pdf_path", help="Caminho para o arquivo PDF")
-
-    # Parse do argumento
-    args = parser.parse_args()
-
-    # Chama a função principal passando o caminho do PDF
-    main(args.pdf_path)
+if __name__ == '__main__':
+    app.run(debug=True)

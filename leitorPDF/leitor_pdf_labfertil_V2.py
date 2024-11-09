@@ -82,7 +82,7 @@ def extrair_valor_abaixo(page, keyword, left=-5, top=0, right=5, below=11):
 
 # Exemplo de uso
 
-pdf_path = "./Exemplo de Laudo - Análise de Solo.pdf"
+pdf_path = ".\Exemplo de Laudo - Análise de Solo.pdf"
 
 #Extração dos dados
 SMP = extrair_valor_ind_smp(pdf_path)

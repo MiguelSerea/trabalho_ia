@@ -22,7 +22,7 @@ import fitz  # PyMuPDF
 import json  # Biblioteca para manipulação de JSON
 
 # Carrega o PDF
-pdf_document = fitz.open("./Exemplo de Laudo - Análise de Solo.pdf")
+pdf_document = fitz.open(".\Exemplo de Laudo - Análise de Solo.pdf")
 page = pdf_document[0]  # Primeira página
 
 # Define as palavras-chave para busca
