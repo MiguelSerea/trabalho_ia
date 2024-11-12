@@ -1,6 +1,9 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from .utils import fuzzy_potassio, fuzzy_fosforo
+
+
 
 @csrf_exempt
 def process_request(request):
@@ -27,8 +30,12 @@ def process_request(request):
             K = float(data.get('K', 0.0))
 
             # Processamento dos valores para a resposta
-            valor_potassio_hectare = CTC_ph7 * 2  # Exemplo de cálculo
-            valor_fosforo_hectare = argila * 3    # Exemplo de cálculo
+            teste1fosforo = fuzzy_fosforo(9.3, 35.0)
+            teste2potassio = fuzzy_potassio(200.0, 25.0)
+            print(teste1fosforo)
+            print(teste2potassio)
+            valor_potassio_hectare = fuzzy_potassio(K, CTC_ph7)
+            valor_fosforo_hectare = fuzzy_fosforo(P, argila)
 
             return JsonResponse({
                 "status": status,

@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views  # Certifique-se de que está importando as views corretamente
+from . import views  # Certifique-se de importar sua view
 
 urlpatterns = [
-    path('process_request/', views.process_request, name='process_request'),  # Definindo a URL para process_request
+    path('process_request/', views.process_request, name='process_request'),  
 ]
