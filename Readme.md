@@ -1,4 +1,4 @@
-# Projeto de Extração de Dados de Laudos Labfertil com Flask e PyMuPDF
+# Fuzzyficação de dados utilizando python com django
 
   - Este projeto foi desenvolvido como microsserviço de um trabalho da disciplina de **Inteligência Artificial** para extrair dados específicos (``CTC_ph7``,``argila``,``K``,``P``) de laudos de análise de solo emitidos pelo **Labfertil**. Utiliza **Django** para criar uma API e **skfuzzy** para manipular os dados recebidos, permitindo que os dados sejam fuzzyficados e retornados ao fazer a requisição por meio de um ``json``venviados via requisição HTTP ``POST``.<br>
 
