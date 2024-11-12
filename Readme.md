@@ -59,7 +59,7 @@ Exemplo de JSON de resposta numa operação onde há falha:
   "status": "failed",
   "CTC_ph7": 25.0,
   "argila": 35.0,
-  "P": "error,
+  "P": "error",
   "K": 200
 }
 ```
