@@ -6,15 +6,14 @@
 
 ## Estrutura do Projeto
 
-1. **Script principal:** `leitor_pdf_labfertil_V4.py` - Script que implementa o servidor Flask e a lógica de extração de dados.
-2. **Dependências:** `requirements.txt` - Lista de pacotes Python necessários, incluindo:
+1. **Dependências:** `requirements.txt` - Lista de pacotes Python necessários, incluindo:
    - django
    - numpy
    - scipy
    - scikit-fuzzy
 
      
-3. **Servidor Hospedado localmente:** é hospedada em `http://localhost:8000/dashboard/process_request/`, que:
+2. **Servidor Hospedado localmente:** é hospedada em `http://localhost:8000/dashboard/process_request/`, que:
    - Aceita apenas requisições **POST**.
    - Processa jsons enviados para o sufixo `/dashboard/process_request/` dessa URL.
    - confira se o servidor ainda está rodando localmente e esteja atento ao status do erro:
