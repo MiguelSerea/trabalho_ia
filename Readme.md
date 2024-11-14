@@ -11,6 +11,8 @@
    - numpy
    - scipy
    - scikit-fuzzy
+   - packaging
+   - networkx
 
      
 2. **Servidor Hospedado localmente:** é hospedada em `http://localhost:8000/dashboard/process_request/`, que:
@@ -45,18 +47,16 @@ A resposta será um ``JSON`` com os valores extraídos. Em caso de falha, o camp
 Exemplo de JSON de resposta numa operação de sucesso:
 ```json
 {
-  "status": "success",
   "CTC_ph7": 25.0,
   "argila": 35.0,
   "P": 9.3,
-  "K": 200
+  "K": 200.0
 }
 ```
 
 Exemplo de JSON de resposta numa operação onde há falha:
 ```json
 {
-  "status": "failed",
   "CTC_ph7": 25.0,
   "argila": 35.0,
   "P": "error",
