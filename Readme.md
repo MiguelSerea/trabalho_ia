@@ -44,7 +44,7 @@
 # Estrutura de Retorno
 A resposta será um ``JSON`` com os valores extraídos. Em caso de falha, o campo ``"status"`` será ``"failed"`` e os campos não identificados terão valor ``null``.
 
-Exemplo de JSON de resposta numa operação de sucesso:
+Exemplo de JSON de enivio numa operação de sucesso:
 ```json
 {
   "CTC_ph7": 25.0,
@@ -53,8 +53,17 @@ Exemplo de JSON de resposta numa operação de sucesso:
   "K": 200.0
 }
 ```
+Resposta esperada:
+```json
+{
+"status": "success",
+"valor_potassio_hectare": 47.22,
+"valor_fosforo_hectare": 133.56
+}
 
-Exemplo de JSON de resposta numa operação onde há falha:
+```
+
+Exemplo de JSON de envio numa operação onde há falha:
 ```json
 {
   "CTC_ph7": 25.0,
@@ -62,6 +71,16 @@ Exemplo de JSON de resposta numa operação onde há falha:
   "P": "error",
   "K": 200
 }
+
+```
+Resposta esperada:
+```json
+{
+"status": "failed",
+"valor_potassio_hectare": 0.0,
+"valor_fosforo_hectare": 0.0
+}
+
 ```
 ---
 Obrigado por se interessar pelo projeto!
