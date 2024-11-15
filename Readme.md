@@ -57,8 +57,8 @@ Resposta esperada:
 ```json
 {
 "status": "success",
-"valor_potassio_hectare": 47.22,
-"valor_fosforo_hectare": 133.56
+"valor_potassio_hectare": 29.28,
+"valor_fosforo_hectare": 136.07
 }
 
 ```
