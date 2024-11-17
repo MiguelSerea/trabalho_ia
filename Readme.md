@@ -40,6 +40,10 @@
 ```bash
    python manage.py runserver
    ```
+
+3. Verifique a versão do python
+  Há um problema apartir da versão 3.13.0 do python, usar sempre versão do python inferiores!
+  recomendo a versão 3.12.6
    
 # Estrutura de Retorno
 A resposta será um ``JSON`` com os valores extraídos. Em caso de falha, o campo ``"status"`` será ``"failed"`` e os campos não identificados terão valor ``null``.
